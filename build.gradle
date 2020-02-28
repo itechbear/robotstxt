@@ -1,0 +1,27 @@
+plugins {
+    id 'java-library'
+}
+
+group 'org.github.itechbear'
+version '0.0.1'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+compileJava {
+    options.compilerArgs += ["-encoding", "utf-8"]
+    options.fork = true
+    options.forkOptions.executable = "javac"
+}
+
+dependencies {
+    testImplementation("org.junit.jupiter:junit-jupiter-api:${jupiterVersion}")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${jupiterVersion}")
+}
+
+test {
+    useJUnitPlatform()
+}

@@ -34,7 +34,7 @@ public class RobotsTxtParser {
             // accept whitespace in its stead.
             // static const char * const kWhite = " \t";
             // sep = strpbrk(line, kWhite);
-            sep = Util.FindFirstOf(line, " \t", 0);
+            sep = Util.FindFirstCharOf(line, " \t", 0);
         }
         if (sep < 0) {
             return null;

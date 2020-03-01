@@ -7,29 +7,29 @@ import java.util.Set;
 public class Util {
     private static final String kHexDigits = "0123456789ABCDEF";
 
-    private static final Set<Character> kHexDigitSet = new HashSet<Character>() {{
-        add('0');
-        add('1');
-        add('2');
-        add('3');
-        add('4');
-        add('5');
-        add('6');
-        add('7');
-        add('8');
-        add('9');
-        add('a');
-        add('b');
-        add('c');
-        add('d');
-        add('e');
-        add('f');
-        add('A');
-        add('B');
-        add('C');
-        add('D');
-        add('E');
-        add('F');
+    private static final Set<Byte> kHexDigitSet = new HashSet<Byte>() {{
+        add((byte) '0');
+        add((byte) '1');
+        add((byte) '2');
+        add((byte) '3');
+        add((byte) '4');
+        add((byte) '5');
+        add((byte) '6');
+        add((byte) '7');
+        add((byte) '8');
+        add((byte) '9');
+        add((byte) 'a');
+        add((byte) 'b');
+        add((byte) 'c');
+        add((byte) 'd');
+        add((byte) 'e');
+        add((byte) 'f');
+        add((byte) 'A');
+        add((byte) 'B');
+        add((byte) 'C');
+        add((byte) 'D');
+        add((byte) 'E');
+        add((byte) 'F');
     }};
 
     public static boolean StartsWithIgnoreCase(String text, String prefix) {
@@ -39,13 +39,17 @@ public class Util {
         return text.substring(0, prefix.length()).equalsIgnoreCase(prefix);
     }
 
-    public static int FindFirstOf(String hayStack, String needle, int start) {
-        boolean[] set = new boolean[128];
+    // for any char of needle, find its first position in the haystack,
+    // this is basically equivalent to c++'s string::find_first_of(haystack, needle, start).
+    // However, c++'s version can apply to ascii char only, whereas this implementation
+    // supports unicode chars.
+    public static int FindFirstCharOf(String hayStack, String needle, int start) {
+        Set<Character> set = new HashSet(needle.length());
         for (char c : needle.toCharArray()) {
-            set[c] = true;
+            set.add(c);
         }
         for (int i = start; i < hayStack.length(); ++i) {
-            if (set[hayStack.charAt(i)]) {
+            if (set.contains(hayStack.charAt(i))) {
                 return i;
             }
         }
@@ -58,7 +62,7 @@ public class Util {
         if (url.length() >= 2 && url.charAt(0) == '/' && url.charAt(1) == '/') search_start = 2;
 
         // int early_path = url.find_first_of("/?;", search_start);
-        int early_path = FindFirstOf(url, "/?;", search_start);
+        int early_path = FindFirstCharOf(url, "/?;", search_start);
         int protocol_end = url.indexOf("://", search_start);
         if (early_path < protocol_end) {
             // If path, param or query starts before ://, :// doesn't indicate protocol.
@@ -71,7 +75,7 @@ public class Util {
         }
 
         // int path_start = url.find_first_of("/?;", protocol_end);
-        int path_start = FindFirstOf(url, "/?;", protocol_end);
+        int path_start = FindFirstCharOf(url, "/?;", protocol_end);
         if (path_start != -1) {
             int hash_pos = url.indexOf('#', search_start);
             if (hash_pos >= 0 && hash_pos < path_start) return "/";
@@ -86,7 +90,7 @@ public class Util {
         return "/";
     }
 
-    public static boolean IsHexDigit(char c) {
+    public static boolean IsHexDigit(byte c) {
         return kHexDigitSet.contains(c);
     }
 
@@ -98,7 +102,7 @@ public class Util {
         // First, scan the buffer to see if changes are needed. Most don't.
         for (int i = 0; i < bytes.length; ++i) {
             // (a) % escape sequence.
-            if (bytes[i] == '%' && IsHexDigit((char) bytes[i + 1]) && IsHexDigit((char) bytes[i + 2])) {
+            if (bytes[i] == '%' && IsHexDigit(bytes[i + 1]) && IsHexDigit(bytes[i + 2])) {
                 if (Character.isLowerCase((char) bytes[i + 1]) || Character.isLowerCase((char) bytes[i + 2])) {
                     need_capitalize = true;
                 }
@@ -116,7 +120,7 @@ public class Util {
         StringBuilder dst = new StringBuilder(num_to_escape * 2 + bytes.length + 1);
         for (int i = 0; i < bytes.length; i++) {
             // (a) Normalize %-escaped sequence (eg. %2f -> %2F).
-            if (bytes[i] == '%' && IsHexDigit((char) bytes[i + 1]) && IsHexDigit((char) bytes[i + 2])) {
+            if (bytes[i] == '%' && IsHexDigit(bytes[i + 1]) && IsHexDigit(bytes[i + 2])) {
                 dst.append((char) bytes[i]);
                 ++i;
                 dst.append(Character.toUpperCase((char) bytes[i]));

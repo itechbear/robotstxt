@@ -1,4 +1,4 @@
-package com.github.itechbear.robotstxt4j;
+package com.github.itechbear.robotstxt;
 
 import java.util.AbstractMap;
 import java.util.Map;

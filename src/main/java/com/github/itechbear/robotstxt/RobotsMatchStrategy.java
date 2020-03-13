@@ -1,4 +1,4 @@
-package com.github.itechbear.robotstxt4j;
+package com.github.itechbear.robotstxt;
 
 public abstract class RobotsMatchStrategy {
     protected static boolean Matches(String path, String pattern) {

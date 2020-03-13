@@ -47,7 +47,7 @@ artifacts {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            artifactId = "robotstxt4j"
+            artifactId = "robotstxt"
             from components.java
 
             artifact(sourceJar) {
@@ -58,9 +58,9 @@ publishing {
             }
 
             pom {
-                name = "robotstxt4j"
+                name = "robotstxt"
                 description = "A java clone of Google's robotst.txt parser: https://github.com/google/robotstxt"
-                url = "https://github.com/itechbear/robotstxt4j"
+                url = "https://github.com/itechbear/robotstxt"
                 licenses {
                     license {
                         name = 'The Apache License, Version 2.0'
@@ -75,17 +75,17 @@ publishing {
                     }
                 }
                 scm {
-                    connection = 'scm:git:git://github.com/itechbear/robotstxt4j.git'
-                    developerConnection = 'scm:git:ssh://github.com/itechbear/robotstxt4j.git'
-                    url = "https://github.com/itechbear/robotstxt4j"
+                    connection = 'scm:git:git://github.com/itechbear/robotstxt.git'
+                    developerConnection = 'scm:git:ssh://github.com/itechbear/robotstxt.git'
+                    url = "https://github.com/itechbear/robotstxt"
                 }
             }
         }
     }
     repositories {
         maven {
-            url "https://oss.sonatype.org/service/local/staging/deploy/maven2"
-            // url "https://oss.sonatype.org/content/repositories/snapshots"
+            // url "https://oss.sonatype.org/service/local/staging/deploy/maven2"
+            url "https://oss.sonatype.org/content/repositories/snapshots"
             credentials {
                 username sonatypeUsername
                 password sonatypePassword

@@ -1,4 +1,4 @@
-package com.github.itechbear.robotstxt4j;
+package com.github.itechbear.robotstxt;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

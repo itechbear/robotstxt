@@ -1,16 +1,16 @@
-### robotstxt4j
+# robotstxt (java)
 
 A java clone of [Google's robotst.txt parser](https://github.com/google/robotstxt), passing all unit tests.
 
 **Disclaimer:**
 - The author of this repository is not affiliated to Google by any means.
 
-### Features
+# Features
 
 - With google specific optimizations, compared with other implmentations (credit to Google authors)
 - No extra dependency other than JDK
 
-### How to use
+# How to use
 
 - Add this repository to your workspace
 - Example
@@ -40,6 +40,6 @@ matcher.OneAgentAllowedByRobots(robotstxt, "FooBot", url);
 matcher.AllowedByRobots(robotstxt, Arrays.asList("FooBot", "BarBot"), url);
 ```
 
-### Change log
+# Change log
 
 - 0.0.1 Initial release, based on [google/robotstxt@750aec7](https://github.com/google/robotstxt/tree/750aec7933648c816d6d5bb2f4fe5c30f2485ccf)  

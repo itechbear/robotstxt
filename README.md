@@ -12,8 +12,26 @@ A java clone of [Google's robotst.txt parser](https://github.com/google/robotstx
 
 # How to use
 
-- Add this repository to your workspace
-- Example
+- Add this repository to your workspace, based on your build tool:
+  - Maven
+    ```xml
+    <dependency>
+      <groupId>com.github.itechbear</groupId>
+      <artifactId>robotstxt</artifactId>
+      <version>0.0.1</version>
+    </dependency>
+    ```
+  - Gradle(Groovy)
+    ```groovy
+    implementation 'com.github.itechbear:robotstxt:0.0.1'
+    ```
+  - SBT
+    ```scale
+    libraryDependencies += "com.github.itechbear" % "robotstxt" % "0.0.1"
+    ```
+  - For any other build tool, please refer to [https://search.maven.org/artifact/com.github.itechbear/robotstxt/0.0.1/jar](https://search.maven.org/artifact/com.github.itechbear/robotstxt/0.0.1/jar)
+
+- Code sample
 ```java
 String robotstxt = "allow: /foo/bar/\n" +
                 "\n" +

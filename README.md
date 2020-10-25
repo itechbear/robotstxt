@@ -12,7 +12,7 @@ A java clone of [Google's robotst.txt parser](https://github.com/google/robotstx
 
 # How to use
 
-- Add this repository to your workspace, based on your build tool:
+- Add this package to your build dependency, based on your build tool:
   - Maven
     ```xml
     <dependency>
